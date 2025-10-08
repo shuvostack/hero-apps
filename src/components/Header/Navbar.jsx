@@ -1,17 +1,19 @@
 import React from "react";
 import { NavLink } from "react-router";
 import logo from "../../assets/logo.png";
+import githubIcon from "../../assets/github-icon.png";
+import "./Navbar.css";
 
 const Navbar = () => {
 
-    const links = <>
-        <NavLink><li>Home</li></NavLink>
-        <NavLink><li className="mx-4">Apps</li></NavLink>
-        <NavLink><li>Installation</li></NavLink>
-    </>
+    const links = <nav className="flex gap-7">
+        <NavLink to="/">Home</NavLink>
+        <NavLink>Apps</NavLink>
+        <NavLink>Installation</NavLink>
+    </nav>
 
   return (
-    <div className="navbar bg-base-100 shadow-sm">
+    <div className="navbar bg-base-100 max-w-7xl mx-auto">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -40,7 +42,7 @@ const Navbar = () => {
             }
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl "><img src={logo} alt="logo" className="w-10" />HERO.IO</a>
+        <a className="btn btn-ghost text-xl font-bold bg-gradient-to-r from-[#632EE3] to-[#9F62F2] bg-clip-text text-transparent"><img src={logo} alt="logo" className="w-10" />HERO.IO</a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
@@ -50,7 +52,7 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Button</a>
+        <a className="btn bg-gradient-to-r from-[#632EE3] to-[#9F62F2] text-white"><img src={githubIcon} alt="" /> Contribute</a>
       </div>
     </div>
   );
