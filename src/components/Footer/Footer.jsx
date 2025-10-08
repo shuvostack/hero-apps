@@ -6,7 +6,7 @@ import facebookIcon from '../../assets/facebook.png'
 
 const Footer = () => {
     return (
-        <div className='max-w-7xl mx-auto p-14'>
+        <div className='max-w-7xl mx-auto p-10'>
             <div className='flex justify-between'>
                 <div>
                     <a className="btn btn-ghost text-lg font-bold text-white"><img src={logo} alt="logo" className="w-6" />HERO.IO</a>
@@ -24,7 +24,7 @@ const Footer = () => {
             <div className='border-b-1 border-[#264356] my-5'></div>
 
             <div>
-                <p>Copyright © 2025 - All right reserved</p>
+                <p className='text-white text-center'><small>Copyright © 2025 - All right reserved</small></p>
             </div>
         </div>
     );
