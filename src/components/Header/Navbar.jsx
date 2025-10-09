@@ -8,8 +8,8 @@ const Navbar = () => {
 
     const links = <nav className="flex gap-7">
         <NavLink to="/">Home</NavLink>
-        <NavLink>Apps</NavLink>
-        <NavLink>Installation</NavLink>
+        <NavLink to="/apps">Apps</NavLink>
+        <NavLink to="/installation">Installation</NavLink>
     </nav>
 
   return (
@@ -52,7 +52,7 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn bg-gradient-to-r from-[#632EE3] to-[#9F62F2] text-white"><img src={githubIcon} alt="" /> Contribute</a>
+        <a href="https://github.com/shuvostack" className="btn bg-gradient-to-r from-[#632EE3] to-[#9F62F2] text-white"><img src={githubIcon} alt="" /> Contribute</a>
       </div>
     </div>
   );
