@@ -1,16 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLoaderData, useParams } from "react-router";
 import downloadIcon from "../../assets/downloads-icon.png";
 import ratingIcon from "../../assets/rating-icon.png";
 import reviewIcon from "../../assets/review.png";
-import { Bar, ComposedChart, XAxis, YAxis } from "recharts";
+import { Bar, ComposedChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 import { addToStoredDB } from "../../utility/addToDB";
 
 const Details = () => {
+  const [install, setInstall] = useState(false);
   const { id } = useParams();
   const appId = parseInt(id);
   const data = useLoaderData();
-  const singleApp = data.find((book) => book.id === appId);
+  const singleApp = data.find((app) => app.id === appId);
 
   const {
     image,
@@ -36,8 +37,25 @@ const Details = () => {
   })
  //   console.log(chartData)
 
+  useEffect(() => {
+    const installApp = JSON.parse(localStorage.getItem("install")) || [];
+    const alreadyInstalled = installApp.some(a => a.id === appId);
+
+    if (alreadyInstalled) {
+      setInstall(true);
+    }
+  }, [appId]);
+
   const handleInstallation = id => {
+
+    const installApp = JSON.parse(localStorage.getItem("install")) || [];
     
+    if (!installApp.some(a => a.id === id)) {
+      installApp.push(singleApp);
+      localStorage.setItem("install", JSON.stringify(installApp))
+    }
+
+    setInstall(true);
     addToStoredDB(id)
   }
 
@@ -45,7 +63,7 @@ const Details = () => {
     <section className="bg-[#f5f5f5]">
       <div className="max-w-7xl mx-auto">
         {/* first part */}
-        <div className="flex gap-5 p-6">
+        <div className="flex flex-col md:flex-row lg:flex-row gap-5 p-6">
           <div>
             <img src={image} alt="" className="w-70 rounded-lg shadow-sm" />
           </div>
@@ -57,7 +75,7 @@ const Details = () => {
 
             <div className="border-b-1 border-[#001931] my-4"></div>
 
-            <div className="flex items-center gap-12">
+            <div className="flex flex-col md:flex-row lg:flex-row items-center gap-12">
               {/* downloads */}
               <div className="flex flex-col items-center">
                 <img src={downloadIcon} alt="" />
@@ -86,19 +104,21 @@ const Details = () => {
               </div>
             </div>
 
-            <a onClick={() => handleInstallation(id)} className="btn text-white bg-[#00D390] mt-2">Install Now ({size}MB)</a>
+            <a onClick={() => handleInstallation(id)} disabled={install} className="btn text-white bg-[#00D390] mt-2"> {install ? "Installed" : "Install Now"} ({size}MB)</a>
           </div>
         </div>
 
         <div className="border-b-1 border-[#001931] my-5"></div>
 
         {/* second part */}
-        <div>
-            <ComposedChart layout="vertical" width={1200} height={500} data={chartData}>
+        <div className="w-full h-64 md:h-80 lg:h-95">
+            <ResponsiveContainer width="90%" height="100%">
+              <ComposedChart layout="vertical" width={1200} height={500} data={chartData}>
                 <YAxis dataKey="name" type="category"></YAxis>
                 <XAxis type="number"></XAxis>
                 <Bar dataKey="count" fill="#FF8811"></Bar>
-            </ComposedChart>
+              </ComposedChart>
+            </ResponsiveContainer>
         </div>
 
         <div className="border-b-1 border-[#001931] my-5"></div>
