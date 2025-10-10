@@ -7,7 +7,7 @@ const ErrorPage = () => {
     const goBack = useNavigate();
 
     return (
-        <div className='flex flex-col items-center justify-center'>
+        <div className='flex flex-col items-center justify-center p-16'>
             <div>
                 <img src={errorImage} alt="error image" className='w-90'/>
             </div>

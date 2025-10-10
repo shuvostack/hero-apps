@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useLoaderData } from "react-router";
 import { getStoredApp } from "../../utility/addToDB";
 import InstalledApp from "../InstalledApp/InstalledApp";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+
+const MySwal = withReactContent(Swal);
 
 const Installation = () => {
   const [install, setInstall] = useState([]);
@@ -33,6 +37,13 @@ const handleSort = (type) => {
 } 
 
 const handleUninstall = (id) => {
+
+  Swal.fire({
+        title: "Uninstalled",
+        icon: "success",
+        draggable: true,
+      })
+
   const remove = install.filter(app => app.id !== id);
   setInstall(remove);
 

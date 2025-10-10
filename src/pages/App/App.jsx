@@ -4,7 +4,9 @@ import star from "../../assets/star.png";
 import { Link } from "react-router";
 
 const App = ({ singleApp }) => {
+  
   const {id, image, title, downloads, ratingAvg } = singleApp;
+
 
   return (
     <Link to={`/details/${id}`}>
