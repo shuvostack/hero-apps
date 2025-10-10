@@ -32,6 +32,15 @@ const handleSort = (type) => {
     }
 } 
 
+const handleUninstall = (id) => {
+  const remove = install.filter(app => app.id !== id);
+  setInstall(remove);
+
+  const storedApp = getStoredApp();
+  const removeApp = storedApp.filter(a => parseInt(a) !== id);
+  localStorage.setItem("install", JSON.stringify(removeApp));
+}
+
 
   return (
     <section className="bg-[#f5f5f5]">
@@ -68,7 +77,7 @@ const handleSort = (type) => {
 
         <div className="flex flex-col gap-4">
           {install.map((app) => (
-            <InstalledApp key={app.id} app={app}></InstalledApp>
+            <InstalledApp key={app.id} app={app} handleUninstall={handleUninstall}></InstalledApp>
           ))}
         </div>
       </div>

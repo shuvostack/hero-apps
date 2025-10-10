@@ -2,8 +2,9 @@ import React from "react";
 import downloadIcon from "../../assets/downloads-icon.png";
 import starIcon from "../../assets/star.png";
 
-const InstalledApp = ({ app }) => {
-  const { image, title, downloads, size, ratingAvg } = app;
+const InstalledApp = ({ app , handleUninstall }) => {
+
+  const {id, image, title, downloads, size, ratingAvg } = app;
 
   return (
     <div className="flex items-center justify-between bg-white p-2 rounded-xl">
@@ -43,7 +44,7 @@ const InstalledApp = ({ app }) => {
       </div>
 
       <div>
-        <button className="btn bg-[#00D390] text-white">Uninstall</button>
+        <button onClick={() => handleUninstall(id)} className="btn bg-[#00D390] text-white">Uninstall</button>
       </div>
     </div>
   );

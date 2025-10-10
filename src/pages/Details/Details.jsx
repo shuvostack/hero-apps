@@ -39,7 +39,7 @@ const Details = () => {
 
   useEffect(() => {
     const installApp = JSON.parse(localStorage.getItem("install")) || [];
-    const alreadyInstalled = installApp.some(a => a.id === appId);
+    const alreadyInstalled = installApp.some(a => a === appId);
 
     if (alreadyInstalled) {
       setInstall(true);
